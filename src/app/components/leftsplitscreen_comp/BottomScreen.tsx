@@ -33,7 +33,10 @@ const BottomScreen = () => {
         </label>
 
         {projArr.map((item) => (
-          <div className="p-1 pb-0 mb-3 flex flex-row justify-between  ">
+          <div
+            key={item}
+            className="p-1 pb-0 mb-3 flex flex-row justify-between  "
+          >
             <div className="flex gap-2 text-sm">
               <FiSidebar size={20} />
               {item}
