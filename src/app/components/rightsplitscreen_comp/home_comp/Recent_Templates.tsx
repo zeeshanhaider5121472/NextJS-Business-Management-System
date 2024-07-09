@@ -15,12 +15,9 @@ const Recent_Templates = () => {
   return (
     <div className="  items-center relative  overflow-x-auto overflow-y-scroll no-scrollbar  flex flex-row gap-5 pl-5 py-2">
       {fakeRecent.map((item) => (
-        <div className="flex flex-row h-28 ">
+        <div key={item.id} className="flex flex-row h-28 ">
           <div className="bg-blue-500 h-full w-2 rounded-s-lg" />
-          <div
-            key={item.id}
-            className=" flex-shrink-0 h-full w-60 rounded-e-lg bg-white outline outline-1 outline-gray-300 items-center gap-2 py-3 px-2"
-          >
+          <div className=" flex-shrink-0 h-full w-60 rounded-e-lg bg-white outline outline-1 outline-gray-300 items-center gap-2 py-3 px-2">
             <p className="text-sm font-medium">{item.name}</p>
             <p className="text-sm text-gray-600">Last Updated: {item.date}</p>
           </div>
