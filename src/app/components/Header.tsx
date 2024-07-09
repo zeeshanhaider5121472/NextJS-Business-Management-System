@@ -5,9 +5,9 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 const Header = () => {
   return (
     <div className="flex flex-row items-center justify-between pb-4 pl-4">
-      <div className="flex flex-row items-center">
+      <div className="flex  items-center ">
         <BsGrid3X3GapFill className="mr-3 cursor-pointer" size={18} />
-        <p className="font-bold text-xl mr-5 pt-1.5 text-purple-800">BPMS</p>
+        <p className="font-bold text-2xl mr-5 pt-0.5 text-purple-800">BPMS</p>
       </div>
 
       <div className="flex flex-row items-center ">

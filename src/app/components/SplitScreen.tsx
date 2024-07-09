@@ -6,6 +6,7 @@ const SplitScreen = () => {
     <div className="flex flex-row h-screen">
       <LeftSplitScreen />
       <RightSplitScreen />
+      
     </div>
   );
 };
