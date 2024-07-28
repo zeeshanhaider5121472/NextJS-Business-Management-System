@@ -1,5 +1,9 @@
 const RightSplitScreenMytasks = () => {
-  return <div className="bg-purple-300 flex flex-grow">return Mytasks</div>;
+  return (
+    <div className="bg-white overflow-x-auto flex flex-col pt-20 flex-grow w-full rounded-tl-2xl p-16 ">
+      aa
+    </div>
+  );
 };
 
 export default RightSplitScreenMytasks;

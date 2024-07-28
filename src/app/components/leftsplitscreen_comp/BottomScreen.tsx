@@ -36,7 +36,7 @@ const BottomScreen = () => {
       </div>
 
       <div className="mt-5 mb-5 pr-2">
-        <label className="flex input input-bordered  min-w-0 flex-1 items-center gap-2 pb-5 text-xs md:text-sm lg:text-base">
+        <label className="flex input min-w-0 px-0 flex-1 items-center justify-center gap-2 text-xs md:text-sm lg:text-base">
           <input
             type="text"
             className="  min-w-0 flex-1 pl-2 pr-2 pb-1 pt-1 bg-transparent border rounded-md border-gray-300"

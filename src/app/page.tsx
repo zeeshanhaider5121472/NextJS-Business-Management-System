@@ -1,11 +1,11 @@
-import Header from "./components/Header";
-import SplitScreen from "./components/SplitScreen";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col p-5 pt-5">
-      <Header />
-      <SplitScreen />
-    </main>
-  );
+  redirect("/home");
+  // return (
+  //   <main className="flex min-h-screen flex-col p-5 pt-5">
+  //     <Header />
+  //     <SplitScreen />
+  //   </main>
+  // );
 }

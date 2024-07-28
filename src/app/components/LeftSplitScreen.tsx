@@ -12,7 +12,10 @@ const LeftSplitScreen: React.FC<LeftSplitScreenProps> = ({
 }) => {
   return (
     <div className="flex flex-col w-1/3 md:w-1/4 lg:w-1/4 mr-4 ">
-      <TopScreen setActiveRightScreenComp={setActiveRightScreenComp} activeRightScreenComp={activeRightScreenComp}/>
+      <TopScreen
+        setActiveRightScreenComp={setActiveRightScreenComp}
+        activeRightScreenComp={activeRightScreenComp}
+      />
       <BottomScreen />
     </div>
   );
