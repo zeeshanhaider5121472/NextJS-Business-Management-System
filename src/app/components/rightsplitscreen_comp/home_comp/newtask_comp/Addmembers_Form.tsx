@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import Members_Dropdown from "./members_dropdown";
+import Members_Dropdown from "./Members_Dropdown";
 
 const teamMembers = ["Haider", "Ghareer", "Mikail", "John", "Jun"];
 
