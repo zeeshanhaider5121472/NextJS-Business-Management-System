@@ -25,24 +25,27 @@ const Addmembers_Form = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <span className="w-full max-w-lg border-2 border-blue-500">
+    <div className="flex w-3/5 items-center justify-center bg-white">
+      <span className="w-full max-w-lg  py-60">
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <h1 className="text-2xl font-semibold text-gray-700 ">
             Let’s start working together
           </h1>
-          <span className="mt-4 border-2 border-gray-300 flex flex-row bg-white">
+          <p className="text-gray-500 mt-4 p-0.5">
+            Give your process a name, e.g: marketing plan
+          </p>
+          <span className="mt-1 border-2 border-gray-300 flex flex-row bg-white rounded-md">
             <input
               type="text"
               placeholder="Process Name"
-              className="w-full px-4 py-2"
+              className="w-full px-4 py-2 rounded-md focus:outline-none focus:ring-transparent"
               value={processName}
               onChange={(e) => {
                 setProcessName(e.target.value);
               }}
             />
             <button
-              className="px-2 py-2 content-center cursor-pointer font-bold"
+              className="px-2 pb-1 pr-3 content-center cursor-pointer font-bold text-gray-400 hover:text-black"
               onClick={(e) => {
                 e.preventDefault();
                 setProcessName("");
@@ -60,7 +63,7 @@ const Addmembers_Form = () => {
           />
 
           <span className="mt-4 flex justify-end">
-            <button type="submit" className="btn btn-primary text-white">
+            <button type="submit" className="btn bg-blue-500 text-white hover:bg-blue-600">
               Next
               <IoIosArrowForward />
             </button>
