@@ -25,7 +25,7 @@ const Addmembers_Form = () => {
   };
 
   return (
-    <div className="flex w-3/5 items-center justify-center bg-white">
+    <div className="flex w-3/5 items-center justify-center bg-white rounded-lg">
       <span className="w-full max-w-lg  py-60">
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <h1 className="text-2xl font-semibold text-gray-700 ">
@@ -63,7 +63,10 @@ const Addmembers_Form = () => {
           />
 
           <span className="mt-4 flex justify-end">
-            <button type="submit" className="btn bg-blue-500 text-white hover:bg-blue-600">
+            <button
+              type="submit"
+              className="btn bg-blue-500 text-white hover:bg-blue-600"
+            >
               Next
               <IoIosArrowForward />
             </button>
