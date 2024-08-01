@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { useDrag, useDrop } from "react-dnd";
+import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 interface TestFieldProps {
   name: string;
@@ -114,24 +115,23 @@ const TestingTemplate = () => {
   console.log(components);
 
   return (
-    <>abc</>
-    // <DndProvider backend={HTML5Backend}>
-    //   <div className="flex flex-row min-w-screen bg-white">
-    //     <div className="flex flex-col w-full">
-    //       <DropTarget name="a" setComponents={setComponents} />
-    //       {components.map((item, mainindex) => (
-    //         <div className="flex flex-col gap-2" key={item.groupName}>
-    //           {item.components.map((component, compindex) => (
-    //             <div key={component.id}>{component.component}</div>
-    //           ))}
-    //         </div>
-    //       ))}
-    //     </div>
-    //     <div className="flex flex-col w-full">
-    //       <TestField name="TextField" value={5} />
-    //     </div>
-    //   </div>
-    // </DndProvider>
+    <DndProvider backend={HTML5Backend}>
+      <div className="flex flex-row min-w-screen bg-white">
+        <div className="flex flex-col w-full">
+          <DropTarget name="a" setComponents={setComponents} />
+          {components.map((item, mainindex) => (
+            <div className="flex flex-col gap-2" key={item.groupName}>
+              {item.components.map((component, compindex) => (
+                <div key={component.id}>{component.component}</div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col w-full">
+          <TestField name="TextField" value={5} />
+        </div>
+      </div>
+    </DndProvider>
   );
 };
 
