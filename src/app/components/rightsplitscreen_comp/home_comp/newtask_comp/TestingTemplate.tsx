@@ -3,7 +3,13 @@
 import React, { useState } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
 
+const isMobile =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+const Backend = isMobile ? TouchBackend : HTML5Backend;
 interface TestFieldProps {
   name: string;
   value: number;
@@ -12,7 +18,7 @@ interface TestFieldProps {
 const TestField: React.FC<TestFieldProps> = ({ name, value }) => {
   console.log("checking TF");
 
-  const textcomp = <div>HI</div>;
+  const textcomp = <input placeholder="Add Text"></input>;
   const [, drag] = useDrag(() => ({
     type: "FIELD",
     item: { name, value, textcomp },
@@ -115,7 +121,7 @@ const TestingTemplate = () => {
   console.log(components);
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={Backend} options={{ enableMouseEvents: true }}>
       <div className="flex flex-row min-w-screen bg-white">
         <div className="flex flex-col w-full">
           <DropTarget name="a" setComponents={setComponents} />
