@@ -40,7 +40,7 @@ const TestField: React.FC<TestFieldProps> = ({ name, value }) => {
 type ComponentState = {
   groupName: string;
   components: {
-    id: string;
+    id: number;
     component: React.ReactNode;
     label: string;
   }[];
@@ -52,7 +52,7 @@ interface DropTargetProps {
       {
         groupName: string;
         components: {
-          id: string;
+          id: number;
           component: React.ReactNode;
           label: string;
         }[];
@@ -78,7 +78,7 @@ const DropTarget: React.FC<DropTargetProps> = ({ name, setComponents }) => {
       setComponents((prevGroups) => {
         const newGroups = [...prevGroups];
         newGroups[0].components.push({
-          id: "text",
+          id: 3,
           component: item.textcomp,
           label: "text",
         });
@@ -104,17 +104,24 @@ const TestingTemplate = () => {
       groupName: "Input Field Items",
       components: [
         {
-          id: "singleLine",
-          component: (
+          id: 1,
+          component: [
             <input
+              key={"t1"}
               className="p-2 border rounded"
               placeholder="Single Line Input"
-            ></input>
-          ),
+            ></input>,
+
+            <input
+              key={"t2"}
+              className="p-2 border rounded"
+              placeholder="Single Line Input"
+            ></input>,
+          ],
           label: "Single Line",
         },
         {
-          id: "multiLine",
+          id: 2,
           component: <div className="p-2 border rounded">Multiline</div>,
           label: "Multi Line",
         },
@@ -123,6 +130,7 @@ const TestingTemplate = () => {
   ]);
   console.log(components);
 
+  let i = 1;
   return (
     <DndProvider backend={Backend} options={{ enableMouseEvents: true }}>
       <div className="flex flex-row min-w-screen bg-white">
@@ -131,7 +139,8 @@ const TestingTemplate = () => {
           {components.map((item, mainindex) => (
             <div className="flex flex-col gap-2" key={item.groupName}>
               {item.components.map((component, compindex) => (
-                <div key={component.id}>{component.component}</div>
+                // <div key={component.id}>{component.component}</div>
+                <div key={`${component.id}`}>{component.component}</div>
               ))}
             </div>
           ))}
