@@ -20,21 +20,76 @@ interface DragDropProps {
   type: string;
 }
 
+const AllComp: React.FC<{ item: ComponentStateProps }> = ({ item }) => {
+  const { isOver, setNodeRef } = useDroppable({
+    id: item.id,
+  });
+
+  const style = {
+    color: isOver ? "green" : undefined,
+    backgroundColor: isOver ? "lightgreen" : undefined,
+  };
+  return (
+    <div
+      key={item.id}
+      ref={setNodeRef}
+      style={style}
+      className="items-center justify-center p-4 mb-6  border-4 border-dotted border-red-600 bordered"
+    >
+      {item.taskcomponents.length === 0
+        ? item.maincomponent
+        : item.taskcomponents}
+    </div>
+  );
+};
+
 const Tt2 = () => {
-  const [components, setComponents] = useState<ComponentStateProps[]>([]);
-  console.log("checking TT");
+  const [components, setComponents] = useState<ComponentStateProps[]>([
+    {
+      id: 0,
+      taskname: "Task 0",
+      maincomponent: (
+        <div className="flex flex-row w-80 h-40 bg-transparent items-center justify-center cursor-default">
+          drop here
+        </div>
+      ),
+      taskcomponents: [],
+    },
+  ]);
   const [droppedItem, setDroppedItem] = useState<React.ReactNode>();
 
   const handleDragEnd = (event: DragEndEvent) => {
-    setDroppedItem(event.active.data.current as any);
-
     // if (active.id !== over?.id) {
-    //   setDroppedItem({
-    //     id: active.id as string,
-    //     type: active.data.current?.type || "",
-    //   });
-    // }
+    const taskindex: number = event.over?.id as number;
+    console.log(event.over?.id);
+    console.log(event.active?.id);
+    //adds the new component to the array of components
+    if (
+      event.active?.id == "draggable-textfield" &&
+      (event.over?.id as number) >= 0
+    ) {
+      setComponents((prevComponents) => {
+        const updatedComponents = [...prevComponents];
+        updatedComponents[taskindex].taskcomponents = [
+          ...updatedComponents[taskindex].taskcomponents,
+          event.active.data.current as any,
+        ];
+        return updatedComponents;
+      });
+    }
   };
+
+  // if (event.active?.id == "draggable-textfield" && event.over?.id) {
+  //   setDroppedItem(event.active.data.current as any);
+  // }
+
+  // if (active.id !== over?.id) {
+  //   setDroppedItem({
+  //     id: active.id as string,
+  //     type: active.data.current?.type || "",
+  //   });
+  // }
+  // };
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
@@ -42,12 +97,9 @@ const Tt2 = () => {
         <section className="flex flex-col w-full items-center justify-center">
           {droppedItem}
           <div>
-            {components.map((item: ComponentStateProps, index: number) => (
-              <div key={item.id}>
-                {item.taskcomponents.length == 0
-                  ? item.maincomponent
-                  : item.taskcomponents}
-              </div>
+            {components.map((item, index) => (
+              //  {item.maincomponent}
+              <AllComp item={item} />
             ))}
           </div>
           <button
@@ -60,7 +112,7 @@ const Tt2 = () => {
                 id: lastid,
                 taskname: `Task ${lastid}`,
                 maincomponent: (
-                  <div className="flex flex-row mb-6 w-80 border-4 border-dotted border-red-600 bordered h-40 bg-white items-center justify-center">
+                  <div className="flex flex-row w-80 h-40 bg-transparent items-center justify-center">
                     drop here
                   </div>
                 ),
@@ -77,7 +129,6 @@ const Tt2 = () => {
           </button>
         </section>
         <section className="flex flex-col w-full bg-slate-200 items-center justify-center">
-          <input placeholder="drag me" />
           {/* <DraggableTextField1 id="text Field" /> */}
           <DraggableTextField />
           <DroppableArea id="droppable-area" />
@@ -89,8 +140,10 @@ const Tt2 = () => {
 
 export function DraggableTextField() {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: "draggable-textfield11",
-    data: <div>bca</div>,
+    id: "draggable-textfield",
+    data: (
+      <input type="text" placeholder="Text Field!" className="border p-2" />
+    ),
   });
 
   const style = transform
@@ -102,9 +155,10 @@ export function DraggableTextField() {
   return (
     <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
       <input
+        disabled
         type="text"
-        placeholder="Drag me!"
-        className="border p-2 cursor-move"
+        placeholder="Text Field!"
+        className="border p-2 cursor-move read-only"
       />
     </div>
   );
@@ -125,8 +179,12 @@ export function DroppableArea({ id }: DroppableAreaProps) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="border p-4 min-h-[100px]">
-      abc
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="border-blue-500 items-center justify-center p-4 border-4 "
+    >
+      drop on me
     </div>
   );
 }
@@ -137,3 +195,26 @@ export default Tt2;
 // how to get item from draggable
 // hot to store item from draggable at droppable
 // then push item inside array
+
+// const [components, setComponents] = useState<ComponentStateProps[]>([
+//   {
+//     id: 0,
+//     taskname: "Task 0",
+//     maincomponent: (
+//       <div className="flex flex-row mb-6 w-80 border-4 border-dotted border-red-600 bordered h-40 bg-white items-center justify-center">
+//         drop here
+//       </div>
+//     ),
+//     taskcomponents: [<div key="task0">1 inside</div>],
+//   },
+//   {
+//     id: 1,
+//     taskname: "Task 1",
+//     maincomponent: (
+//       <div className="flex flex-row mb-6 w-80 border-4 border-dotted border-red-600 bordered h-40 bg-white items-center justify-center">
+//         drop here
+//       </div>
+//     ),
+//     taskcomponents: [<div key="task1">2.1 inside</div>],
+//   },
+// ]);
