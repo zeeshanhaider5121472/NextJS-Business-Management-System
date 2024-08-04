@@ -56,7 +56,7 @@ const Tt2 = () => {
       taskcomponents: [],
     },
   ]);
-  const [droppedItem, setDroppedItem] = useState<React.ReactNode>();
+  // const [droppedItem, setDroppedItem] = useState<React.ReactNode>();
 
   const handleDragEnd = (event: DragEndEvent) => {
     // if (active.id !== over?.id) {
@@ -64,10 +64,7 @@ const Tt2 = () => {
     console.log(event.over?.id);
     console.log(event.active?.id);
     //adds the new component to the array of components
-    if (
-      event.active?.id == "draggable-textfield" &&
-      (event.over?.id as number) >= 0
-    ) {
+    if (event.active?.id && (event.over?.id as number) >= 0) {
       setComponents((prevComponents) => {
         const updatedComponents = [...prevComponents];
         updatedComponents[taskindex].taskcomponents = [
@@ -93,9 +90,8 @@ const Tt2 = () => {
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      <main className="flex flex-row bg-white mt-44">
+      <main className="flex flex-row bg-white mt-44" aria-disabled>
         <section className="flex flex-col w-full items-center justify-center">
-          {droppedItem}
           <div>
             {components.map((item, index) => (
               //  {item.maincomponent}
@@ -131,6 +127,7 @@ const Tt2 = () => {
         <section className="flex flex-col w-full bg-slate-200 items-center justify-center">
           {/* <DraggableTextField1 id="text Field" /> */}
           <DraggableTextField />
+          <DraggableTextField2 />
           <DroppableArea id="droppable-area" />
         </section>
       </main>
@@ -164,6 +161,31 @@ export function DraggableTextField() {
   );
 }
 
+export function DraggableTextField2() {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: "draggable-textfield2",
+    data: (
+      <input type="text" placeholder="Text Field2!" className="border p-2" />
+    ),
+  });
+
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
+
+  return (
+    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+      <input
+        disabled
+        type="text"
+        placeholder="Text Field2!"
+        className="border p-2 cursor-move read-only"
+      />
+    </div>
+  );
+}
 interface DroppableAreaProps {
   id: string;
 }
