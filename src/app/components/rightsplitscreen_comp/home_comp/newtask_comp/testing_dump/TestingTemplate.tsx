@@ -60,7 +60,7 @@ interface DropTargetProps {
     >
   >;
 }
-
+// required
 const DropTarget: React.FC<DropTargetProps> = ({ name, setComponents }) => {
   console.log("checking DT");
 

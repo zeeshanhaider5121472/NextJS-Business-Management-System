@@ -128,7 +128,7 @@ const Tt2 = () => {
           {/* <DraggableTextField1 id="text Field" /> */}
           <DraggableTextField />
           <DraggableTextField2 />
-          <DroppableArea id="droppable-area" />
+          {/* <DroppableArea id="droppable-area" /> */}
         </section>
       </main>
     </DndContext>
