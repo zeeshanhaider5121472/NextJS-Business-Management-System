@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-interface Tasknamefield_comp_Props {
+export interface comp_Props {
   item: {
     tasknumber: number;
     required: boolean;
@@ -12,20 +12,33 @@ interface Tasknamefield_comp_Props {
         value: string;
         disabled: boolean;
       };
+      textfield: {
+        id: number;
+        value: string;
+        disabled: boolean;
+      };
     }>;
   };
   index: number;
 }
 
-const Tasknamefield_comp: React.FC<Tasknamefield_comp_Props> = ({
-  item,
-  index,
-}) => {
+const Tasknamefield_comp: React.FC<comp_Props> = ({ item, index }) => {
   const [taskname, settaskname] = useState<string>("");
+
+  const handleInputChange = (value: string) => {
+    settaskname(value);
+    console.log(index);
+    item.taskcomponents.map((item, i) => {
+      if (i === 0) {
+        item.tasktitle.value = value;
+      }
+      console.log(value);
+    });
+  };
   return (
     <div
       key={item.taskcomponents[index]?.tasktitle.id}
-      className="flex flex-col w-1/2"
+      className="flex flex-col"
     >
       <div className="flex flex-row mt-4 items-start ml-4 justify-between">
         <div className="flex flex-row justify-center items-center">
@@ -37,18 +50,7 @@ const Tasknamefield_comp: React.FC<Tasknamefield_comp_Props> = ({
             type="text"
             placeholder="Add your text here ..."
             value={taskname}
-            onChange={async (e) => {
-              settaskname(e.target.value);
-              console.log(index);
-              item.taskcomponents.map((item, i) => {
-                if (i === 0) {
-                  item.tasktitle.value = e.target.value;
-                }
-                console.log(item.tasktitle.value);
-              });
-              // item.taskcomponents[index].tasktitle.value = e.target.value;
-              // console.log(item.taskcomponents[index].tasktitle.value);
-            }}
+            onChange={(e) => handleInputChange(e.target.value)}
             className="input input-ghost rounded-none bg-transparent focus:border-transparent focus:outline-none focus:ring-transparent w-full"
           />
         </div>

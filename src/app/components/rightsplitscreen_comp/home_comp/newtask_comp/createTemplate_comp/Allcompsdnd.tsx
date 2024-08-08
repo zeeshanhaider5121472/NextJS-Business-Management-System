@@ -1,39 +1,34 @@
 "use client";
+
 import { useState } from "react";
+import Singlelinefield from "./allcompsdrops/Singlelinefield";
 import Tasknamefield_comp from "./allcompsdrops/Tasknamefield_comp";
 
-const Allcompsdnd = () => {
-  //   interface Task {
-  //     id: number;
-  //     tasknumber: number;
-  //     taskname: string;
-  //     taskcomponents: TaskComponent[];
-  //   }
-
-  interface Project {
+export interface Project {
+  id: number;
+  projectname: string;
+  members: string[];
+  taskslist: Array<{
     id: number;
-    projectname: string;
-    members: string[];
-    taskslist: Array<{
-      id: number;
-      tasknumber: number;
-      taskname: string;
-      taskowner: string[];
-      required: boolean;
-      taskcomponents: {
-        tasktitle: {
-          id: number;
-          value: string;
-          disabled: boolean;
-        };
-        textfield: {
-          id: number;
-          value: string;
-          disabled: boolean;
-        };
-      }[];
-    }>;
-  }
+    tasknumber: number;
+    taskname: string;
+    taskowner: string[];
+    required: boolean;
+    taskcomponents: {
+      tasktitle: {
+        id: number;
+        value: string;
+        disabled: boolean;
+      };
+      textfield: {
+        id: number;
+        value: string;
+        disabled: boolean;
+      };
+    }[];
+  }>;
+}
+const Allcompsdnd = () => {
   const [components, setComponents] = useState<Project[]>([
     {
       id: 0,
@@ -62,18 +57,109 @@ const Allcompsdnd = () => {
       ],
     },
   ]);
+  const handleCheckboxChange = (index: number) => {
+    const newcomps = [...components];
+    newcomps[0].taskslist[index].taskcomponents[0].textfield.disabled =
+      !newcomps[0].taskslist[index].taskcomponents[0].textfield.disabled;
+    setComponents(newcomps);
+    // setComponents((prevComponents) => {
+    //   const updatedComponents = prevComponents.map((project) => ({
+    //     ...project,
+    //     taskslist: project.taskslist.map((task, taskindex) => {
+    //       if (taskindex === index) {
+    //         return {
+    //           ...task,
+    //           taskcomponents: task.taskcomponents.map((component) => ({
+    //             ...component,
+    //             textfield: {
+    //               ...component.tasktitle,
+    //               disabled: !component.textfield.disabled,
+    //             },
+    //           })),
+    //         };
+    //       }
+    //       return task;
+    //     }),
+    //   }));
+    //   return updatedComponents;
+    // });
+  };
+  //     const updatedComponents = [...components];
+
+  //     //     setDisableitem(
+  //     //       !updatedComponents[0].taskslist[index].taskcomponents[0].tasktitle
+  //     //         .disabled
+  //     //     );
+
+  //     //     // Update the specific item's disabled property in the copy
+  //     //     updatedComponents[0].taskslist[index].taskcomponents[0].tasktitle.disabled =
+  //     //       !disableitem;
+
+  //     //     // Update the state with the modified copy
+  //     //     setComponents(updatedComponents);
+  //     //     console.log(components);
+  //     //     setDisableitem(false);
+
+  //     // item.required = !item.required;
+  //     //     item.taskcomponents[0].tasktitle.disabled = e.target.checked;
+  //     //     console.log(index);
+  //     //     console.log(item.taskcomponents[0].tasktitle.disabled);
+  //     //     console.log(item);
+  //   };
+  //   const handleCheckboxChange = () => {
+  //     setComponents((prevComponents) => {
+  //       const newComponents = [...prevComponents];
+  //       const newTasksList = [...newComponents[0].taskslist];
+  //       const updatedTask = {
+  //         ...newTasksList[taskIndex],
+  //         taskcomponents: [
+  //           {
+  //             ...newTasksList[taskIndex].taskcomponents[0],
+  //             tasktitle: {
+  //               ...newTasksList[taskIndex].taskcomponents[0].tasktitle,
+  //               disabled: checked,
+  //             },
+  //           },
+  //         ],
+  //       };
+  //       newTasksList[taskIndex] = updatedTask;
+  //       newComponents[0] = { ...newComponents[0], taskslist: newTasksList };
+  //       return newComponents;
+  //     });
+  //   };
   return (
     <div className="flex flex-col min-h-screen w-full mt-4 bg-white">
       {components[0].taskslist.map((item, index) => (
-        <Tasknamefield_comp
-          key={components[0].id + index}
-          item={item}
-          index={index}
-        />
+        <span key={components[0].id + index} className="w-2/3">
+          <Tasknamefield_comp
+            key={components[0].id + index}
+            item={item}
+            index={index}
+          />
+
+          {!item.taskcomponents[0].textfield.disabled && (
+            <Singlelinefield
+              key={`singleline-${components[0].id}-${index}`}
+              item={item}
+              index={index}
+              setComponents={setComponents}
+              components={components}
+            />
+          )}
+          <button
+            onClick={(e) => {
+              handleCheckboxChange(index);
+            }}
+            className="btn"
+          >
+            hide now
+          </button>
+        </span>
       ))}
+
       <button
         type="button"
-        className="btn min-w-fit max-w-min"
+        className="btn mt-12 ml-64 min-w-fit max-w-min"
         onClick={async (e) => {
           e.preventDefault;
           const newindex = components[0].taskslist.length;
@@ -81,7 +167,7 @@ const Allcompsdnd = () => {
             id: newindex,
             tasknumber: newindex + 1,
             taskowner: [],
-            taskname: `Task ${newindex}`,
+            taskname: `Task ${newindex + 1}`,
             required: false,
             taskcomponents: [
               {
@@ -111,6 +197,12 @@ const Allcompsdnd = () => {
 };
 
 export default Allcompsdnd;
+
+//  const isTaskTitleDisabled = (): boolean => {
+//   return taskslist.some(task =>
+//     task.taskcomponents.some(component => component.tasktitle.disabled)
+//   );
+// };
 
 // const [components, setComponents] = useState([
 //       {
