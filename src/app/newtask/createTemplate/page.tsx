@@ -1,7 +1,6 @@
 import Header from "@/app/components/Header";
 import BottomScreen from "@/app/components/leftsplitscreen_comp/BottomScreen";
 import DndMainComp from "@/app/components/rightsplitscreen_comp/home_comp/newtask_comp/createTemplate_comp/dndmaincomp/DndMainComp";
-import Tt2 from "@/app/components/rightsplitscreen_comp/home_comp/newtask_comp/testing_dump/Tt2";
 
 export default function CreateTemplate() {
   //where i'm using useSesarchParams() that whole component should be enclosed in <suspence> </suspence>
@@ -18,7 +17,7 @@ export default function CreateTemplate() {
         </div>
         <DndMainComp />
       </div>
-      <Tt2 />
+      {/* <Tt2 /> */}
       {/* <TestingTemplate />
        */}
     </main>
