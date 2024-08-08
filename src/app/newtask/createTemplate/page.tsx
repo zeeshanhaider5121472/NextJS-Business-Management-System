@@ -1,7 +1,6 @@
-"use client";
 import Header from "@/app/components/Header";
 import BottomScreen from "@/app/components/leftsplitscreen_comp/BottomScreen";
-import Allcompsdnd from "@/app/components/rightsplitscreen_comp/home_comp/newtask_comp/createTemplate_comp/Allcompsdnd";
+import DndMainComp from "@/app/components/rightsplitscreen_comp/home_comp/newtask_comp/createTemplate_comp/dndmaincomp/DndMainComp";
 import Tt2 from "@/app/components/rightsplitscreen_comp/home_comp/newtask_comp/testing_dump/Tt2";
 
 export default function CreateTemplate() {
@@ -17,8 +16,7 @@ export default function CreateTemplate() {
         <div className="flex flex-row w-1/6 mr-4 min-h-screen disabled pointer-events-none opacity-20">
           <BottomScreen />
         </div>
-        <Allcompsdnd />
-        <div className="flex flex-row w-1/3 mr-4 min-h-screen disabled pointer-events-none bg-green-600"></div>
+        <DndMainComp />
       </div>
       <Tt2 />
       {/* <TestingTemplate />
