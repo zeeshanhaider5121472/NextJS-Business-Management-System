@@ -1,5 +1,7 @@
 import { useDroppable } from "@dnd-kit/core";
 import { Project } from "../DndMainComp";
+import Radiobtndump from "./Radiobtndump";
+import Radiobuttons from "./Radiobuttons";
 import Singlelinefield from "./Singlelinefield";
 import Tasknamefield_comp from "./Tasknamefield_comp";
 
@@ -47,6 +49,8 @@ const Maindrops: React.FC<Maindrops_props> = ({
           components={components}
         />
       )}
+      {/* <Radiobtndump /> */}
+      <Radiobuttons />
     </div>
   );
 };

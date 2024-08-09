@@ -1,6 +1,6 @@
 "use client";
 import { DndContext, DragEndEvent, useDraggable } from "@dnd-kit/core";
-import { useState } from "react";
+import { useId, useState } from "react";
 import Allcompsdrops from "./Allcompsdrops";
 
 export interface Project {
@@ -27,7 +27,6 @@ export interface Project {
     }[];
   }>;
 }
-
 const DndMainComp = () => {
   const [components, setComponents] = useState<Project[]>([
     {
@@ -57,9 +56,11 @@ const DndMainComp = () => {
       ],
     },
   ]);
+  const dndid = useId();
 
   return (
     <DndContext
+      id={dndid}
       onDragEnd={(event: DragEndEvent) => {
         const droppedindex = event.over?.id as number;
         if (event.active.id == "textfield" && droppedindex >= 0) {
