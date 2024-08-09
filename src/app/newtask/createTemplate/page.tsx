@@ -1,6 +1,7 @@
 import Header from "@/app/components/Header";
 import BottomScreen from "@/app/components/leftsplitscreen_comp/BottomScreen";
 import DndMainComp from "@/app/components/rightsplitscreen_comp/home_comp/newtask_comp/createTemplate_comp/dndmaincomp/DndMainComp";
+import FixdropH from "@/app/components/rightsplitscreen_comp/home_comp/newtask_comp/testing_dump/FixdropH";
 
 export default function CreateTemplate() {
   //where i'm using useSesarchParams() that whole component should be enclosed in <suspence> </suspence>
@@ -16,6 +17,7 @@ export default function CreateTemplate() {
           <BottomScreen />
         </div>
         <DndMainComp />
+        {/* <FixdropH /> */}
       </div>
       {/* <Tt2 /> */}
       {/* <TestingTemplate />

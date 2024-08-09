@@ -102,10 +102,14 @@ export function DraggableTextField() {
     : undefined;
 
   return (
-    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <div className="bg-red-500 h-12 flex items-center justify-center cursor-pointer">
-        TEXT-FIELD
-      </div>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className="bg-red-500 h-12 flex items-center justify-center cursor-pointer"
+    >
+      TEXT-FIELD
     </div>
   );
 }

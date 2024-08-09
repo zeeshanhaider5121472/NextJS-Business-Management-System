@@ -82,6 +82,8 @@ const Allcompsdrops: React.FC<Maindrops_props> = ({
   //       return newComponents;
   //     });
   //   };
+ 
+ 
   return (
     <div className="flex flex-col min-h-screen w-full mt-4 bg-white">
       {components[0].taskslist.map((item, index) => (

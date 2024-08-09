@@ -54,7 +54,7 @@ const Singlelinefield: React.FC<Singlelinefield_props> = ({
             Handleclosetextfield(index);
           }}
         >
-          <IoIosClose className="w-8 h-8 cursor-pointer text-green-500 hover:text-red-700" />
+          <IoIosClose className="w-8 h-8 cursor-pointer text-orange-500 hover:text-red-700" />
         </button>
       </div>
       <div className="bg-gray-100 p-3 rounded-md">
