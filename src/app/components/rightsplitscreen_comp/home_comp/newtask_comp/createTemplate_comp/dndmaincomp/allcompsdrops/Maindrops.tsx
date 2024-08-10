@@ -1,6 +1,5 @@
 import { useDroppable } from "@dnd-kit/core";
 import { Project } from "../DndMainComp";
-import Radiobtndump from "./Radiobtndump";
 import Radiobuttons from "./Radiobuttons";
 import Singlelinefield from "./Singlelinefield";
 import Tasknamefield_comp from "./Tasknamefield_comp";
@@ -35,7 +34,7 @@ const Maindrops: React.FC<Maindrops_props> = ({
       className={`mb-4 p-4 ${isOver ? "bg-blue-100" : "bg-white"}`}
     >
       <Tasknamefield_comp
-        key={components[0].id + index}
+        key={`taskname-${components[0].id}-${index}`}
         item={item}
         index={index}
       />
@@ -50,7 +49,14 @@ const Maindrops: React.FC<Maindrops_props> = ({
         />
       )}
       {/* <Radiobtndump /> */}
-      <Radiobuttons />
+      {item.taskcomponents[0].radiobutton.disabled == false && (
+        <Radiobuttons
+          key={`radiobutton-${components[0].id}-${index}`}
+          taskindex={index}
+          setComponents={setComponents}
+          components={components}
+        />
+      )}
     </div>
   );
 };

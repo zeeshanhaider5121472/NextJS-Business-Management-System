@@ -1,12 +1,27 @@
+"use client";
 import { useState } from "react";
 import { IoIosClose } from "react-icons/io";
+import { Project } from "../DndMainComp";
 
-interface Radiobtns_props {
+interface Radiobtnsarray_props {
   id: number;
   label: string;
 }
-const Radiobuttons = () => {
-  const [radiobtnoptions, setRadiobtnoptions] = useState<Radiobtns_props[]>([
+
+interface Radiobtncomp_props {
+  taskindex: number;
+  setComponents: (newArray: Project[]) => void;
+  components: Project[];
+}
+
+const Radiobuttons: React.FC<Radiobtncomp_props> = ({
+  taskindex,
+  setComponents,
+  components,
+}) => {
+  const [radiobtnoptions, setRadiobtnoptions] = useState<
+    Radiobtnsarray_props[]
+  >([
     { id: 0, label: "Education" },
     { id: 1, label: "Information" },
     { id: 2, label: "Entertainment" },
@@ -16,7 +31,7 @@ const Radiobuttons = () => {
     opacity: 0,
   };
   const addradiobtnelement = () => {
-    const newOption: Radiobtns_props = {
+    const newOption: Radiobtnsarray_props = {
       id: radiobtnoptions.length + 1,
       label: "New Option",
     };
@@ -31,11 +46,31 @@ const Radiobuttons = () => {
     );
   };
 
+  const Handledeleteradioitem = (deletedid: number) => {
+    setRadiobtnoptions(
+      radiobtnoptions.filter((option) => option.id !== deletedid)
+    );
+    console.log(radiobtnoptions);
+  };
+
+  const Handledeleteradiocomp = async (index: number) => {
+    console.log("dupcomponents");
+    const dupcomponents = [...components];
+    dupcomponents[0].taskslist[index].taskcomponents[0].radiobutton.disabled =
+      true;
+    setComponents(dupcomponents);
+    console.log(dupcomponents);
+  };
+
   return (
     <div className="mt-5 ml-16 p-4 rounded-lg shadow-md bg-white border-2 border-gray-300">
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-gray-500 font-normal">Radio Buttons</h3>
-        <button onClick={(e) => {}}>
+        <button
+          onClick={(e) => {
+            Handledeleteradiocomp(taskindex);
+          }}
+        >
           <IoIosClose className="w-8 h-8 cursor-pointer text-orange-500 hover:text-red-700" />
         </button>
       </div>
@@ -89,7 +124,7 @@ const Radiobuttons = () => {
                     {option.label}
                   </div>
                 )}
-                <button onClick={(e) => {}}>
+                <button onClick={() => Handledeleteradioitem(option.id)}>
                   <IoIosClose className="w-5 h-5 cursor-pointer text-orange-500 hover:text-red-700" />
                 </button>
               </section>

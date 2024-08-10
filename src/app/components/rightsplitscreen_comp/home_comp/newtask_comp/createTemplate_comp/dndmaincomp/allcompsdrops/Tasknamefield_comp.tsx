@@ -47,6 +47,7 @@ const Tasknamefield_comp: React.FC<comp_Props> = ({ item, index }) => {
           </div>
           <input
             key={item.taskcomponents[index]?.tasktitle.id}
+            id={item.taskcomponents[index]?.tasktitle.id.toString()}
             type="text"
             placeholder="Add your text here ..."
             value={taskname}
@@ -56,6 +57,8 @@ const Tasknamefield_comp: React.FC<comp_Props> = ({ item, index }) => {
         </div>
         <div className="p-4 pr-0 flex-row flex gap-1 justify-start items-center">
           <input
+            // id={item.taskcomponents[index]?.tasktitle.id.toString()`
+            id={`checkbox-${item.taskcomponents[index]?.tasktitle.id}-${index}`}
             type="checkbox"
             className="w-4 h-4"
             onChange={async (e) => {

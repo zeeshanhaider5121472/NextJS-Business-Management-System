@@ -16,6 +16,8 @@ const Allcompsdrops: React.FC<Maindrops_props> = ({
     const newcomps = [...components];
     newcomps[0].taskslist[index].taskcomponents[0].textfield.disabled =
       !newcomps[0].taskslist[index].taskcomponents[0].textfield.disabled;
+    newcomps[0].taskslist[index].taskcomponents[0].radiobutton.disabled =
+      !newcomps[0].taskslist[index].taskcomponents[0].radiobutton.disabled;
     setComponents(newcomps);
     // setComponents((prevComponents) => {
     //   const updatedComponents = prevComponents.map((project) => ({
@@ -82,8 +84,7 @@ const Allcompsdrops: React.FC<Maindrops_props> = ({
   //       return newComponents;
   //     });
   //   };
- 
- 
+
   return (
     <div className="flex flex-col min-h-screen w-full mt-4 bg-white">
       {components[0].taskslist.map((item, index) => (
@@ -125,6 +126,11 @@ const Allcompsdrops: React.FC<Maindrops_props> = ({
                   disabled: false,
                 },
                 textfield: {
+                  id: newindex,
+                  value: "",
+                  disabled: true,
+                },
+                radiobutton: {
                   id: newindex,
                   value: "",
                   disabled: true,
